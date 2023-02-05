@@ -6,6 +6,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'
 db = SQLAlchemy(app)
 
+app.app_context().push()
+
 # Create the database schema
 class Checkout(db.Model):
     patron_id = db.Column(db.Integer, primary_key=True, nullable = False)
