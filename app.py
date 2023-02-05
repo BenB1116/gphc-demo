@@ -5,12 +5,15 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///book.db'
 db = SQLAlchemy(app)
 
-class checkouts(db.model):
-    patron_id = db.Column(db.Integer, primary_key=True)
-    item_id = db.Column(db.Integer, primary_key=True)
-    count = db.Column(db.Integer)
+class Checkouts(db.Model):
+    patron_id = db.Column(db.Integer, primary_key=True, nullable = False)
+    item_id = db.Column(db.Integer, primary_key=True, nullable = False)
 
-
+class Inventory(db.Model):
+    item_id = db.Column(db.Integer, primary_key=True, nullable = False)
+    title = db.Column(db.String(100), nullable = False)
+    author_last = db.Column(db.String(100), nullable = False)
+    author_first = db.Column(db.String(100), nullable = False)
 
 @app.route('/')
 def index():
