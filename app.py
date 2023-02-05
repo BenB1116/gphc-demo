@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
+import pandas as pd
 
 # Create and configure the app
 app = Flask(__name__)
@@ -18,6 +19,11 @@ class Inventory(db.Model):
     title = db.Column(db.String(100), nullable = False)
     author_last = db.Column(db.String(100), nullable = False)
     author_first = db.Column(db.String(100), nullable = False)
+
+with open(r'C:\Users\Ben\Desktop\hrp-machine-learning\data\clean\patron_data.csv', 'r') as file:
+    patron_df = pd.read_csv(file)
+patron_df.to_sql('Checkout', con=db.engine, if_exists='replace')
+
 
 @app.route('/')
 def index():
