@@ -20,9 +20,14 @@ class Inventory(db.Model):
     author_last = db.Column(db.String(100), nullable = False)
     author_first = db.Column(db.String(100), nullable = False)
 
+# Fill the database with data from csvs
 with open(r'C:\Users\Ben\Desktop\hrp-machine-learning\data\clean\patron_data.csv', 'r') as file:
     patron_df = pd.read_csv(file)
 patron_df.to_sql('Checkout', con=db.engine, if_exists='replace')
+
+with open(r'C:\Users\Ben\Desktop\hrp-machine-learning\data\clean\inv_data.csv', 'r') as file:
+    inv_df = pd.read_csv(file)
+inv_df.to_sql('Inventory', con=db.engine, if_exists='replace')
 
 
 @app.route('/')
