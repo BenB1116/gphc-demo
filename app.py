@@ -27,7 +27,7 @@ patron_df.to_sql('Checkout', con=db.engine, if_exists='replace')
 
 with open(r'C:\Users\Ben\Desktop\hrp-machine-learning\data\clean\inv_data.csv', 'r') as file:
     inv_df = pd.read_csv(file)
-inv_df.to_sql('Inventory', con=db.engine, if_exists='replace')
+inv_df.to_sql('Inventory', index = False, con=db.engine, if_exists='replace')
 
 
 @app.route('/')
