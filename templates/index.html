@@ -1,8 +1,56 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<link rel="stylesheet"
+    href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 {% endblock %}
 
 {% block body %}
-<h1>Hello</h1>
+<h1>Book Recommender</h1>
+<form class="form-inline">
+    <div class="form-group">
+        {{form.title(class="form-control")}}
+    </div>
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>
+<div id="result"></div>
+
+<script>
+        $(document).ready(function(){
+            var titles=[];
+            function loadTitles(){
+                $.getJSON('/titles', function(data, status, xhr){
+                    for (var i = 0; i < data.length; i++ ) {
+                        titles.push(data[i].title);
+                    }
+                });
+            };
+            loadTitles();
+          
+            $('#title').autocomplete({
+                source: titles, 
+            }); 
+          
+            $('form').on('submit', function(e){
+                $.ajax({
+                data: {
+                    title:$('#title').val()
+                },
+                type: 'POST',
+                url : '/process'
+                })
+                .done(function(data){ 
+                    if (data.error){
+                        $('#result').text(data.error).show();
+                    }
+                    else {
+                        $('#result').html(data.title).show()
+                    }
+                })
+                e.preventDefault();
+            });
+        }); 
+        </script>
 {% endblock %}
