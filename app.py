@@ -13,12 +13,6 @@ db = SQLAlchemy(app)
 
 app.app_context().push()
 
-
-class SearchForm(Form):  # create form
-    title = StringField('Inventory', validators=[DataRequired(), Length(
-        max=40)], render_kw={"placeholder": "title"})
-
-
 # Create the database schema
 class Checkout(db.Model):
     index = db.Column(db.Integer, primary_key=True)
@@ -31,9 +25,6 @@ class Inventory(db.Model):
     title = db.Column(db.String(100), nullable=False)
     author_last = db.Column(db.String(100), nullable=False)
     author_first = db.Column(db.String(100), nullable=False)
-
-    def as_dict(self):
-        return {'title': self.title}
 
 
 # Fill the database with data from csvs
@@ -48,25 +39,7 @@ inv_df.to_sql('Inventory', index=False, con=db.engine, if_exists='replace')
 
 @app.route('/')
 def index():
-    form = SearchForm(request.form)
     return render_template('index.html', form=form)
-
-
-@app.route('/titles')
-def titledic():
-    res = Inventory.query.all()
-
-    list_titles = [r.as_dict() for r in res]
-    return jsonify(list_titles)
-
-
-@app.route('/process', methods=['POST'])
-def process():
-    title = request.form['title']
-    if title:
-        return jsonify({'title': title})
-    return jsonify({'error': 'missing data..'})
-
 
 # Run the app
 if __name__ == '__main__':
