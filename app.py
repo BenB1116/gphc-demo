@@ -18,9 +18,8 @@ class SearchForm(Form):  # create form
     title = StringField('Inventory', validators=[DataRequired(), Length(
         max=40)], render_kw={"placeholder": "title"})
 
+
 # Create the database schema
-
-
 class Checkout(db.Model):
     index = db.Column(db.Integer, primary_key=True)
     patron_id = db.Column(db.Integer, nullable=False)
