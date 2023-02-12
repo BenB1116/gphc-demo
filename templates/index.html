@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
 
 {% block head %}
+
 {% endblock %}
 
 {% block body %}
-<h1>Book Recommender</h1>
+<div id="content-box">
+    <div id="main-content">
+        <form action="/" method="post">
+            <p><input type="text" name="title" /></p>
+            <p><input type="submit" value="Add"/></p>
+        </form>
+    </div>
+    <div id="side-bar"></div>
+</div>
 {% endblock %}

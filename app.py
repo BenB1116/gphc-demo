@@ -37,9 +37,9 @@ with open(r'C:\Users\Ben\Desktop\hrp-machine-learning\data\clean\inv_data.csv', 
 inv_df.to_sql('Inventory', index=False, con=db.engine, if_exists='replace')
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html', form=form)
+    return render_template('index.html')
 
 # Run the app
 if __name__ == '__main__':
