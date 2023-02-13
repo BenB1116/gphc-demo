@@ -1,7 +1,11 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
+import numpy as np
 import sys
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import re
 
 # Create and configure the app
 app = Flask(__name__)
@@ -40,6 +44,18 @@ inv_df = pd.read_csv('data\clean\inv_data.csv')
 
 patron_df.drop_duplicates(inplace=True)
 
+vectorizer = TfidfVectorizer()
+tfidf = vectorizer.fit_transform(inv_df['title'])
+
+def search_for_title(query):
+    proccessed = re.sub('[^a-zA-Z0-9 ]', '', query.lower())
+    query_vec = vectorizer.transform([proccessed])
+    similarity = cosine_similarity(query_vec, tfidf).flatten()
+
+    index = np.argpartition(similarity, -1)[-1:]
+    result = str(inv_df.iloc[index]['title'])
+
+    return result
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -47,7 +63,7 @@ def index():
         searched_title = request.form['title']
         try:
             # searched_item = Inventory.query.filter_by(title = title).first()
-            return inv_df[inv_df['title'] == searched_title].to_string()
+            return search_for_title(searched_title)
         except:
             return 'There was an issue'
     else:
