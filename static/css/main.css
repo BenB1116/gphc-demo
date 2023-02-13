@@ -12,26 +12,28 @@ body {
 
 #header-box h1 {
     color: white;
+    margin: 0px;
 }
 
 #content-box {
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
+    flex-grow: 1;
+    min-height: 86vh;
 }
 
 #main-content {
     flex: .75;
     margin: 0px;
     padding: 0.5rem;
-    background-color: pink;
 }
 
 #side-bar {
     flex: .25;
     margin: 0px;
     padding: 0.5rem;
-    background-color: blue;
+    background-color: rgba(211, 211, 211, 0.308);
 }
 
 #footer-box {

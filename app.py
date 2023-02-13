@@ -28,17 +28,17 @@ def search_for_title(query):
     # Compare query vector against vectorized titles and select the top 1
     # This can be modified to return top n results
     similarity = cosine_similarity(query_vec, tfidf).flatten()
-    index = np.argpartition(similarity, -1)[-1:]
-    result = inv_df.loc[index[0]]
+    index = np.argpartition(similarity, -1)[-1:][0]
+    print(index)
 
-    return result
+    return index
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         searched_title = request.form['title']
         try:
-            return search_for_title(searched_title)
+            return str(search_for_title(searched_title))
         except:
             return 'There was an issue'
     else:
