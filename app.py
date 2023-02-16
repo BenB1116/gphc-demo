@@ -33,12 +33,17 @@ def search_for_title(query):
 
     return index
 
+current_list = []
+
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         searched_title = request.form['title']
         try:
-            return str(search_for_title(searched_title))
+            result = str(search_for_title(searched_title))
+            current_list.append(result)
+            print(current_list)
+            return result
         except:
             return 'There was an issue'
     else:

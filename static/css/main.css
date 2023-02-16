@@ -29,11 +29,25 @@ body {
     padding: 0.5rem;
 }
 
+#main-content input{
+    float: center;
+    text-align: center;
+}
+
 #side-bar {
     flex: .25;
     margin: 0px;
     padding: 0.5rem;
     background-color: rgba(211, 211, 211, 0.308);
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
+}
+
+#side-bar input{
+    justify-content: flex-end;
+    display: flex;
+    text-align: center;
 }
 
 #footer-box {
@@ -48,6 +62,3 @@ body {
     width: 150px;
 }
 
-#main-content input{
-    float: center;
-}
