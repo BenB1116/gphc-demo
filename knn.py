@@ -38,6 +38,32 @@ class knn:
         
         return can_items
     
+    def gen_sim_dict(self, item):
+        can_patrons = self.get_canidates(item)
+
+        sim_dict = {item2: self.get_jaccard_score(item, item2) for item2 in can_patrons}
+        return sim_dict
+    
+    def merge_dicts(self, dict1, dict2):
+        merge_dict = {}
+        for k, v in dict1:
+            if k in merge_dict.keys:
+                merge_dict[k].append([v])
+            else:
+                merge_dict[k] = v
+
+        for k, v in dict2:
+            if k in merge_dict.keys:
+                merge_dict[k].append([v])
+            else:
+                merge_dict[k] = v
+
+        return merge_dict
+    
+    def combine_dicts(self, item_list):
+        dict_list = []
+        for item in item_list:
+            dict_list.append(self.gen_sim_dict(item))
         
 
 
@@ -49,4 +75,8 @@ new_knn = knn(patron_df, 6)
 
 # print(new_knn.jaccard({1,2,3}, {2,3}))
 
-print(new_knn.get_jaccard_score(3, 100))
+# print(new_knn.get_jaccard_score(3, 100))
+
+# print(new_knn.gen_sim_dict(3))
+
+print(new_knn.merge_dicts({"1":3, "2":3, "4":5},{"1":3, "2":4, "5":5}))
