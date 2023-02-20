@@ -97,16 +97,4 @@ class knn:
 patron_df = pd.read_csv('data\clean\patron_data.csv')
 new_knn = knn(patron_df, 3, 5)
 
-# print(new_knn.get_canidates(3))
-
-# print(new_knn.jaccard({1,2,3}, {2,3}))
-
-# print(new_knn.get_jaccard_score(3, 100))
-
-# print(new_knn.gen_sim_dict(3))
-
-# print(new_knn.merge_dicts({"1":3, "2":3, "4":5},{"1":3, "2":4, "5":5}))
-
-# print(new_knn.average_dicts([1, 2, 4, 5, 6, 7]))
-
 print(new_knn.top_n_closests([224, 236, 714, 730]))
