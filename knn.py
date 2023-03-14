@@ -90,11 +90,7 @@ class knn:
         return list(top_list)[:self.n]
 
         
-        
+# patron_df = pd.read_csv('data\clean\patron_data.csv')
+# new_knn = knn(patron_df, 3, 5)
 
-
-
-patron_df = pd.read_csv('data\clean\patron_data.csv')
-new_knn = knn(patron_df, 3, 5)
-
-print(new_knn.top_n_closests([224, 236, 714, 730]))
+# print(new_knn.top_n_closests([224, 236, 714, 730]))
