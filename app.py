@@ -29,21 +29,33 @@ def search_for_title(query):
     # This can be modified to return top n results
     similarity = cosine_similarity(query_vec, tfidf).flatten()
     index = np.argpartition(similarity, -1)[-1:][0]
-    print(index)
 
     return index
 
-current_list = []
+def search_by_index(index):
+    # Find the index in the inventory
+    result = inv_df[inv_df['item_id'] == index]
+    result = result.to_dict('records')[0]
+
+    # Return the item in the form of a dictionary
+    return result
+
+print(inv_df.head())
+
+ids_list = []
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         searched_title = request.form['title']
         try:
-            result = str(search_for_title(searched_title))
-            current_list.append(result)
-            print(current_list)
-            return result
+            # Search for the id of the title
+            result_id = str(search_for_title(searched_title))
+            # Append the id to the current id list
+            ids_list.append(result_id)
+            print(ids_list)
+
+            return result_id
         except:
             return 'There was an issue'
     else:
