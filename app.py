@@ -43,6 +43,7 @@ def search_by_index(index):
 print(inv_df.head())
 
 ids_list = []
+items_dict_list = []
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -50,16 +51,22 @@ def index():
         searched_title = request.form['title']
         try:
             # Search for the id of the title
-            result_id = str(search_for_title(searched_title))
+            result_id = search_for_title(searched_title)
             # Append the id to the current id list
             ids_list.append(result_id)
+            print(result_id)
+
+            # Get the item info
+            item_dict = search_by_index(result_id)
+            items_dict_list.append(item_dict)
             print(ids_list)
 
-            return result_id
+            # return item_dict['title']
+            return redirect('/')
         except:
             return 'There was an issue'
     else:
-        return render_template('index.html')
+        return render_template('index.html', items = items_dict_list)
 
 # Run the app
 if __name__ == '__main__':

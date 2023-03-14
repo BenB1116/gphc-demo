@@ -13,6 +13,18 @@
         </form>
     </div>
     <div id="side-bar">
+        <tr>
+            <th>Title</th>
+            <th>Author First</th>
+            <th>Author Last</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item['title'] }}</td>
+            <td>{{ item['author_first'] }}</td>
+            <td>{{ item['author_last'] }}</td>
+        </tr>
+        {% endfor %}
         <input type="submit" value="Search for Recommendations"/>
     </div>
 </div>
