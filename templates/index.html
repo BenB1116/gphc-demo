@@ -8,24 +8,26 @@
 <div id="content-box">
     <div id="main-content">
         <form action="/" method="post">
-            <input type="text" name="title" />
+            <input type="text" name="title" placeholder="Search for a book" />
             <input type="submit" value="Add"/>
         </form>
     </div>
     <div id="side-bar">
-        <tr>
-            <th>Title</th>
-            <th>Author First</th>
-            <th>Author Last</th>
-        </tr>
-        {% for item in items %}
-        <tr>
-            <td>{{ item['title'] }}</td>
-            <td>{{ item['author_first'] }}</td>
-            <td>{{ item['author_last'] }}</td>
-        </tr>
-        {% endfor %}
-        <input type="submit" value="Search for Recommendations"/>
+        <h1 style="text-align: center; margin: 10px">Book List</h1>
+        <div id="item-list">
+            {% for item in items %}
+            <div class="item-card">
+                <img src="static\css\img\filler_image.jpg" alt="Cover" style="width: 150px">
+                <br>
+                <b>Title: </b><p>{{ item['title'] }}</p>
+                <b>Author: </b><p>{{ item['author_last']+",
+                    "+item['author_first']}}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div id="button-box"><input class="button" type="submit" value="Search
+                for Recommendations"/></div>
     </div>
 </div>
 {% endblock %}
