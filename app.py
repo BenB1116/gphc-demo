@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import re
+from knn import knn
 # import difflib
 # from fuzzywuzzy import fuzz
 # from fuzzywuzzy import process
@@ -64,7 +65,6 @@ def index():
             result_id = search_for_title(searched_title)
             # Append the id to the current id list
             ids_list.append(result_id)
-            print(result_id)
 
             # Get the item info
             item_dict = search_by_index(result_id)
@@ -77,6 +77,18 @@ def index():
             return 'There was an issue'
     else:
         return render_template('index.html', items = items_dict_list)
+    
+
+new_knn = knn(patron_df, 3, 5)
+@app.route('/recommended', methods=['GET'])
+def reccomend():
+    if request.method == 'GET':
+        try:
+            top_recomendations = new_knn.top_n_closest(ids_list)
+            return str(top_recomendations)
+        except:
+            return 'There was and issue'
+    return render_template('index.html', items = {})
 
 # Run the app
 if __name__ == '__main__':
