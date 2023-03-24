@@ -78,7 +78,7 @@ class knn:
 
         return merged_dict
     
-    def top_n_closests(self, item_list):
+    def top_n_closest(self, item_list):
         average_dict = self.average_dicts(item_list)
         # Sort the dictinary by values
         average_dict = {k: v for k, v in sorted(average_dict.items(), key=lambda item: item[1], reverse=True)}
