@@ -8,7 +8,7 @@
 <div id="content-box">
     <div id="main-content">
         <form action="/" method="POST">
-            <input type="text" name="title" placeholder="Search for a book" />
+            <input type="text" name="title" placeholder="Search for a book" autofocus onfocus="this.select()"/>
             <input type="submit" value="Add"/>
         </form>
     </div>
@@ -20,9 +20,9 @@
                 <img src="static\css\img\filler_image.jpg" alt="Cover"
                     style="width: 150px">
                 <br>
-                <b>Title: </b><p>{{ item['title'] }}</p>
-                <b>Author: </b><p>{{ item['author_last']+",
-                    "+item['author_first']}}</p>
+                <b>Title: </b><p>{{ item['title'].title()  }}</p>
+                <b>Author: </b><p>{{ item['author_last'].title() +",
+                    "+item['author_first'].title() }}</p>
             </div>
             {% endfor %}
         </div>

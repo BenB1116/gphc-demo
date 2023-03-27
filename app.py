@@ -23,6 +23,9 @@ patron_df.drop_duplicates(inplace=True)
 vectorizer = TfidfVectorizer()
 tfidf = vectorizer.fit_transform(inv_df['title'])
 
+# Number of recommendations
+n = 5
+
 # Search returns the closest title to an searched title
 def search_for_title(query):
     # Remove special characters and convert into a vector
@@ -78,16 +81,26 @@ def index():
     else:
         return render_template('index.html', items = items_dict_list)
     
+# Create a new knn object
+new_knn = knn(patron_df, 3, n)
 
-new_knn = knn(patron_df, 3, 5)
 @app.route('/recommended', methods=['GET'])
 def reccomend():
+    # Attempt to search items 
     if request.method == 'GET':
         try:
+            # Find the top n
             top_recomendations = new_knn.top_n_closest(ids_list)
-            return str(top_recomendations)
+            
+            # Get the dictionary representation of every recommendation
+            rec_dicts = []
+            for rec in top_recomendations:
+                rec_dicts.append(search_by_index(rec))
+
+            # Render the template
+            return render_template('recommended.html', recs=rec_dicts, n=n)
         except:
-            return 'There was and issue'
+            return 'There was an issue'
     return render_template('index.html', items = {})
 
 # Run the app

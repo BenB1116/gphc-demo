@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div id="primary-content">
+    <div id="recs-title">
+        <h1>Your Top {{ n }} Recommendations Are:</h1>
+    </div>
+    <div id="recs-container">
+        {% for rec in recs %}
+        <div class="item-card">
+            <img src="static\css\img\filler_image.jpg" alt="Cover"
+                style="width: 150px">
+            <br>
+            <b>Title: </b><p>{{ rec['title'].title() }}</p>
+            <b>Author: </b><p>{{ rec['author_last'].title() +",
+                "+rec['author_first'].title() }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div id="back-container">
+
+    </div>
+</div>
+{% endblock %}
