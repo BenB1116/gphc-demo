@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -34,6 +34,19 @@ def search_for_title(query):
     # This can be modified to return top n results
     similarity = cosine_similarity(query_vec, tfidf).flatten()
     index = np.argpartition(similarity, -1)[-1:][0]
+
+    return index
+
+def search_for_title_multi(query):
+    # Remove special characters and convert into a vector
+    proccessed = re.sub('[^a-zA-Z0-9 ]', '', query.lower())
+    query_vec = vectorizer.transform([proccessed])
+
+    # Compare query vector against vectorized titles and select the top 1
+    # This can be modified to return top n results
+    similarity = cosine_similarity(query_vec, tfidf).flatten()
+    index = np.argpartition(similarity, -5)[-5:]
+    print(f'index: {index}')
 
     return index
 
@@ -94,6 +107,16 @@ def reccomend():
         except:
             return 'There was an issue'
     return render_template('index.html', items = {})
+
+
+@app.route('/autocomplete', methods=['GET'])
+def autocomplete():
+    search = request.args.get('q')
+    results = search_for_title_multi(search)
+    print(results)
+    results_titles = [search_by_index(index)['title'] for index in results]
+    return jsonify(matching_results=results_titles)
+
 
 # Run the app
 if __name__ == '__main__':

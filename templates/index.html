@@ -1,17 +1,39 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 
+<script type="text/javascript">
+$(function() {
+    $("#autocomplete").autocomplete({
+        source:function(request, response) {
+            $.getJSON("{{url_for('autocomplete')}}",{
+                q: request.term, // in flask, "q" will be the argument to look for using request.args
+            }, function(data) {
+                response(data.matching_results); // matching_results from jsonify
+            });
+        },
+        minLength: 2,
+        select: function(event, ui) {
+            console.log(ui.item.value); // not in your question, but might help later
+        }
+    });
+})
+
+</script>
 {% endblock %}
 
 {% block body %}
 <div id="content-box">
     <div id="main-content">
         <form action="/" method="POST">
-            <input type="text" name="title" placeholder="Search for a book" autofocus onfocus="this.select()"/>
+            <input name="title" type="text" id="autocomplete" class="form-control input-lg"/>
             <input type="submit" value="Add"/>
         </form>
     </div>
+
     <div id="side-bar">
         <h1 style="text-align: center; margin: 10px">Book List</h1>
         <div id="item-list">
@@ -27,6 +49,7 @@
             {% endfor %}
         </div>
 
+        
         <div id="button-box">
             <form class="recommend-form" action="/recommended" method="GET">
                 <input class="button" type="submit" value="Search for
