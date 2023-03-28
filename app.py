@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import re
 from knn import knn
+from titlecase import titlecase
 
 # Create and configure the app
 app = Flask(__name__)
@@ -40,6 +41,7 @@ def search_by_index(index):
     # Find the index in the inventory
     result = inv_df[inv_df['item_id'] == index]
     result = result.to_dict('records')[0]
+    result['title'] = titlecase(result['title'])
 
     # Return the item in the form of a dictionary
     return result

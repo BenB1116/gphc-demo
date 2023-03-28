@@ -42,7 +42,7 @@ body {
     display: flex;
 }
 
-#item-list{
+#item-list {
     display: flex;
     margin: 0px;
     flex-wrap: wrap;
@@ -65,11 +65,10 @@ body {
     transition: 0.3s;
     margin: 20px;
     padding: 10px;
-    min-width: 150px;
-    max-width: 175px;
+    width: 175px;
 }
 
-.item-card img{
+.item-card img {
     align-self: center;
 }
 
@@ -206,28 +205,28 @@ form input[type=submit]:disabled {
     color: rgba(0, 0, 0, .3);
 }
 
-.recommend-form{
+.recommend-form {
     all: unset;
 }
 
-#primary-content{
+#primary-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
 }
 
-#recs-title{
+#recs-title {
     justify-content: center;
     width: 100%;
 }
 
-#recs-container{
+#recs-container {
     padding-top: 2vh;
     display: flex;
     justify-content: center;
 }
 
-#recs-title h1{
+#recs-title h1 {
     text-align: center;
 }
