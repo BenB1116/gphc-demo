@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # Read in csvs as DataFrames
 patron_df = pd.read_csv('data\clean\patron_data.csv')
-inv_df = pd.read_csv('data\clean\inv_data.csv')
+inv_df = pd.read_csv('data\clean\inv_data_gr.csv')
 
 # Drop duplicates from patron_df
 patron_df.drop_duplicates(inplace=True)

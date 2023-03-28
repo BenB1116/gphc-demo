@@ -17,7 +17,7 @@
         <div id="item-list">
             {% for item in items %}
             <div class="item-card">
-                <img src="static\css\img\filler_image.jpg" alt="Cover"
+                <img src={{ item['cover_img_url'] }} alt="Cover"
                     style="width: 150px">
                 <br>
                 <b>Title: </b><p>{{ item['title'].title()  }}</p>
