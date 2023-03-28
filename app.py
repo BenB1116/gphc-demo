@@ -5,9 +5,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import re
 from knn import knn
-# import difflib
-# from fuzzywuzzy import fuzz
-# from fuzzywuzzy import process
 
 # Create and configure the app
 app = Flask(__name__)
@@ -36,13 +33,6 @@ def search_for_title(query):
     # This can be modified to return top n results
     similarity = cosine_similarity(query_vec, tfidf).flatten()
     index = np.argpartition(similarity, -1)[-1:][0]
-
-    # title = difflib.get_close_matches(proccessed, inv_df['title'].tolist())[0]
-    # index = inv_df.index[inv_df['title'] == title].tolist()[0]
-    # print('index: '+str(index))
-
-    # title = process.extract(query, inv_df['title'].tolist(), limit=100, scorer=fuzz.token_sort_ratio)[0][0]
-    # index = inv_df.index[inv_df['title'] == title].tolist()[0]
 
     return index
 
