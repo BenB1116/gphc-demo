@@ -31,6 +31,7 @@ body {
     padding: 0.5rem;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 #side-bar {
@@ -84,57 +85,6 @@ body {
     width: 150px;
 }
 
-.button {
-    align-items: center;
-    background-color: #0A66C2;
-    border: 0;
-    border-radius: 100px;
-    box-sizing: border-box;
-    color: #ffffff;
-    cursor: pointer;
-    display: inline-flex;
-    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    justify-content: center;
-    line-height: 20px;
-    max-width: 480px;
-    min-height: 40px;
-    min-width: 0px;
-    overflow: hidden;
-    padding: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
-    touch-action: manipulation;
-    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-}
-
-.button:hover,
-.button:focus {
-    background-color: #16437E;
-    color: #ffffff;
-}
-
-.button:active {
-    background: #09223b;
-    color: rgb(255, 255, 255, .7);
-}
-
-.button:disabled {
-    cursor: not-allowed;
-    background: rgba(0, 0, 0, .08);
-    color: rgba(0, 0, 0, .3);
-}
-
-#side-bar .button {
-    align-self: flex-end;
-}
-
 form {
     background-color: white;
     width: 600px;
@@ -142,14 +92,14 @@ form {
     display: flex;
 }
 
-form input {
+form input[type=text] {
     flex: 1;
 }
 
 input[type=text] {
     text-align: left;
-    /* border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px; */
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
     padding-right: 20px;
     border-right: none;
     text-indent: 15px;
@@ -157,53 +107,6 @@ input[type=text] {
     border: 2.5px inset;
 }
 
-form input[type=submit] {
-    flex: 0.1;
-    align-items: center;
-    background-color: #0A66C2;
-    border: 0;
-    border-top-right-radius: 100px;
-    border-bottom-right-radius: 100px;
-    box-sizing: border-box;
-    color: #ffffff;
-    cursor: pointer;
-    display: inline-flex;
-    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    justify-content: center;
-    line-height: 20px;
-    max-width: 480px;
-    min-height: 40px;
-    min-width: 0px;
-    overflow: hidden;
-    padding: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
-    touch-action: manipulation;
-    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: middle;
-}
-
-form input[type=submit]:hover,
-form input[type=submit]:focus {
-    background-color: #16437E;
-    color: #ffffff;
-}
-
-form input[type=submit]:active {
-    background: #09223b;
-    color: rgb(255, 255, 255, .7);
-}
-
-form input[type=submit]:disabled {
-    cursor: not-allowed;
-    background: rgba(0, 0, 0, .08);
-    color: rgba(0, 0, 0, .3);
-}
 
 .recommend-form {
     all: unset;
@@ -285,4 +188,67 @@ form input[type=submit]:disabled {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     background-image: none;
+}
+
+
+.button {
+    align-items: center;
+    background-color: #0A66C2;
+    border: 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    min-height: 40px;
+    min-width: 0px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    width: fit-content;
+}
+
+.button:hover,
+.button:focus {
+    background-color: #16437E;
+    color: #ffffff;
+}
+
+.button:active {
+    background: #09223b;
+    color: rgb(255, 255, 255, .7);
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, .08);
+    color: rgba(0, 0, 0, .3);
+}
+
+#submit-button{
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+}
+
+#delete-button {
+    background: red;
+    border-radius: 100px;
+    margin-top: 20px;
+    justify-self: right;
+}
+
+#recommend-button{
+    border-radius: 100px;
+    white-space: nowrap;
 }
