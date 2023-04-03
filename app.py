@@ -59,12 +59,10 @@ def search_by_index(index):
     # Return the item in the form of a dictionary
     return result
 
-print(inv_df.head())
-
 ids_list = []
 items_dict_list = []
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/', methods=['POST', 'GET', 'DELETE'])
 def index():
     if request.method == 'POST':
         searched_title = request.form['title']
@@ -83,6 +81,10 @@ def index():
             return redirect('/')
         except:
             return 'There was an issue'
+    # elif request.method == 'DELETE':
+    #     ids_list = []
+    #     items_dict_list = []
+    #     return redirect('/')
     else:
         return render_template('index.html', items = items_dict_list)
     
@@ -108,6 +110,13 @@ def reccomend():
             return 'There was an issue'
     return render_template('index.html', items = {})
 
+@app.route('/clear', methods=['POST', 'GET', 'DELETE'])
+def clear():
+    global ids_list
+    global items_dict_list
+    ids_list = []
+    items_dict_list = []
+    return render_template('index.html', items = [])
 
 @app.route('/autocomplete', methods=['GET'])
 def autocomplete():
@@ -116,6 +125,8 @@ def autocomplete():
     print(results)
     results_titles = [search_by_index(index)['title'] for index in results]
     return jsonify(matching_results=results_titles)
+
+
 
 
 # Run the app
