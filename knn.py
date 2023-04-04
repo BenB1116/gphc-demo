@@ -49,10 +49,10 @@ class knn:
 
     def gen_sim_dict(self, item):
         # Get a list of canidate patrons
-        can_patrons = self.get_canidates(item)
+        can_items = self.get_canidates(item)
 
         # Compuer the simlarity between every item in the canidate item list
-        sim_dict = {item2: self.get_jaccard_score(item, item2) for item2 in can_patrons}
+        sim_dict = {item2: self.get_jaccard_score(item, item2) for item2 in can_items}
         return sim_dict
     
 
@@ -90,7 +90,7 @@ class knn:
         return list(top_list)[:self.n]
 
         
-# patron_df = pd.read_csv('data\clean\patron_data.csv')
-# new_knn = knn(patron_df, 3, 5)
+patron_df = pd.read_csv('data\clean\patron_data.csv')
+new_knn = knn(patron_df, 3, 5)
 
-# print(new_knn.top_n_closests([224, 236, 714, 730]))
+print(new_knn.get_canidates(45))
