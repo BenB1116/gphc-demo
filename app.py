@@ -14,8 +14,6 @@ app = Flask(__name__)
 patron_df = pd.read_csv('data\clean\patron_data.csv')
 inv_df = pd.read_csv('data\clean\inv_data_gr.csv')
 
-# Drop duplicates from patron_df
-patron_df.drop_duplicates(inplace=True)
 
 # Create a matrix of the vectorized titles from inv_df
 vectorizer = TfidfVectorizer()

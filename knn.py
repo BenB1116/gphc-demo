@@ -38,6 +38,7 @@ class knn:
         can_df = self.checkout_df[self.checkout_df['item_id'] == item]
         can_patrons = set(can_df['patron_id'].values.tolist())
 
+        print(can_patrons)
         # Aggregate all items that the list of patrons have read
         can_items = set()
         for patron in can_patrons:
