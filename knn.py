@@ -38,7 +38,6 @@ class knn:
         can_df = self.checkout_df[self.checkout_df['item_id'] == item]
         can_patrons = set(can_df['patron_id'].values.tolist())
 
-        print(can_patrons)
         # Aggregate all items that the list of patrons have read
         can_items = set()
         for patron in can_patrons:
@@ -92,12 +91,5 @@ class knn:
         return top_list[:self.n]
 
         
-patron_df = pd.read_csv('data\clean\patron_data.csv')
-new_knn = knn(patron_df, 3, 5)
-
-# dict = new_knn.gen_sim_dict(1440)
-# print()
-# print({k: v for k, v in sorted(dict.items(), key=lambda item: item[1], reverse=True)}[2605])
-# 2605, 3451, 1335, 1327
-final_dict = new_knn.top_n_closest([1440])
-print(final_dict)
+# patron_df = pd.read_csv('data\clean\patron_data.csv')
+# new_knn = knn(patron_df, 3, 5)
