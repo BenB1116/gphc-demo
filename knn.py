@@ -84,14 +84,20 @@ class knn:
         # Sort the dictinary by values
         average_dict = {k: v for k, v in sorted(average_dict.items(), key=lambda item: item[1], reverse=True)}
 
+        top_list = list(average_dict.keys())
         # Remove the elements that are in item_list
-        top_list = set(average_dict.keys()) - set(item_list)
+        top_list = [item for item in top_list if item not in item_list]
 
         # Return the first n elements
-        return list(top_list)[:self.n]
+        return top_list[:self.n]
 
         
 patron_df = pd.read_csv('data\clean\patron_data.csv')
 new_knn = knn(patron_df, 3, 5)
 
-print(new_knn.get_canidates(45))
+# dict = new_knn.gen_sim_dict(1440)
+# print()
+# print({k: v for k, v in sorted(dict.items(), key=lambda item: item[1], reverse=True)}[2605])
+# 2605, 3451, 1335, 1327
+final_dict = new_knn.top_n_closest([1440])
+print(final_dict)

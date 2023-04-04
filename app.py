@@ -79,10 +79,6 @@ def index():
             return redirect('/')
         except:
             return 'There was an issue'
-    # elif request.method == 'DELETE':
-    #     ids_list = []
-    #     items_dict_list = []
-    #     return redirect('/')
     else:
         return render_template('index.html', items = items_dict_list)
     
@@ -93,19 +89,19 @@ new_knn = knn(patron_df, 3, n)
 def reccomend():
     # Attempt to search items 
     if request.method == 'GET':
-        try:
-            # Find the top n
-            top_recomendations = new_knn.top_n_closest(ids_list)
-            
-            # Get the dictionary representation of every recommendation
-            rec_dicts = []
-            for rec in top_recomendations:
-                rec_dicts.append(search_by_index(rec))
+        # try:
+        # Find the top n
+        top_recomendations = new_knn.top_n_closest(ids_list)
+        
+        # Get the dictionary representation of every recommendation
+        rec_dicts = []
+        for rec in top_recomendations:
+            rec_dicts.append(search_by_index(rec))
 
-            # Render the template
-            return render_template('recommended.html', recs=rec_dicts, n=n)
-        except:
-            return 'There was an issue'
+        # Render the template
+        return render_template('recommended.html', recs=rec_dicts, n=n)
+        # except:
+        #     return 'There was an issue'
     return render_template('index.html', items = {})
 
 @app.route('/clear', methods=['POST', 'GET', 'DELETE'])
@@ -123,8 +119,6 @@ def autocomplete():
     print(results)
     results_titles = [search_by_index(index)['title'] for index in results]
     return jsonify(matching_results=results_titles)
-
-
 
 
 # Run the app
