@@ -14,6 +14,9 @@ app = Flask(__name__)
 patron_df = pd.read_csv('data\clean\patron_data.csv')
 inv_df = pd.read_csv('data\clean\inv_data_gr.csv')
 
+# Gives good results, but is really slow
+# patron_df = pd.read_csv('data\clean\patron_data_gr.csv')
+
 
 # Create a matrix of the vectorized titles from inv_df
 vectorizer = TfidfVectorizer()
