@@ -6,13 +6,19 @@ from sklearn.metrics.pairwise import cosine_similarity
 import re
 from knn import knn
 from titlecase import titlecase
+import os
 
 # Create and configure the app
 app = Flask(__name__)
 
+patron_path = os.path.join('data', 'clean', 'patron_data.csv')
+inv_path = os.path.join('data', 'clean', 'inv_data_gr.csv')
+
+# patron_path = os.path.join('data', 'clean', 'patron_data_gr.csv')
+
 # Read in csvs as DataFrames
-patron_df = pd.read_csv('data\clean\patron_data.csv')
-inv_df = pd.read_csv('data\clean\inv_data_gr.csv')
+patron_df = pd.read_csv(patron_path)
+inv_df = pd.read_csv(inv_path)
 
 # Gives good results, but is really slow
 # patron_df = pd.read_csv('data\clean\patron_data_gr.csv')
