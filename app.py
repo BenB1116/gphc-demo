@@ -14,15 +14,12 @@ app = Flask(__name__)
 patron_path = os.path.join('data', 'clean', 'patron_data.csv')
 inv_path = os.path.join('data', 'clean', 'inv_data_gr.csv')
 
+# Comment back in to use Good Reads data
 # patron_path = os.path.join('data', 'clean', 'patron_data_gr.csv')
 
 # Read in csvs as DataFrames
 patron_df = pd.read_csv(patron_path)
 inv_df = pd.read_csv(inv_path)
-
-# Gives good results, but is really slow
-# patron_df = pd.read_csv('data\clean\patron_data_gr.csv')
-
 
 # Create a matrix of the vectorized titles from inv_df
 vectorizer = TfidfVectorizer()
@@ -92,6 +89,7 @@ def index():
 # Create a new knn object
 new_knn = knn(patron_df, 3, n)
 
+# Routes user to the recommended page
 @app.route('/recommended', methods=['GET'])
 def reccomend():
     # Attempt to search items 
@@ -111,6 +109,7 @@ def reccomend():
             return 'There was an issue'
     return render_template('index.html', items = {})
 
+# Clears the current book list
 @app.route('/clear', methods=['POST', 'GET', 'DELETE'])
 def clear():
     # Clear all items from both lists
@@ -120,6 +119,7 @@ def clear():
     items_dict_list = []
     return render_template('index.html', items = [])
 
+# Allows autocomplete on the search bar
 @app.route('/autocomplete', methods=['GET'])
 def autocomplete():
     search = request.args.get('q')
